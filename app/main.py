@@ -5,6 +5,10 @@ import random
 # pprint will allow pretty output of the complex data types below.
 # Usage: pp.pprint(stuff)
 import pprint
+import Snake
+import Board
+import Food
+
 pp = pprint.PrettyPrinter(indent=4)
 
 @bottle.route('/static/<path:path>')
@@ -30,7 +34,7 @@ def start():
         'color': '#00FF00',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url,
-        'tail_type': 'freckled';
+        'tail_type': 'freckled',
         'name': 'battlesnake-python'
     }
 
