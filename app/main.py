@@ -2,6 +2,10 @@ import bottle
 import os
 import random
 
+# pprint will allow pretty output of the complex data types below.
+# Usage: pp.pprint(stuff)
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 @bottle.route('/static/<path:path>')
 def static(path):
