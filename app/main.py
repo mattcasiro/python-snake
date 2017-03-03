@@ -42,7 +42,7 @@ def move():
     directions = ['up', 'down', 'left', 'right']
 
     return {
-        'move': random.choice(directions),
+        'move': 'left',
         'taunt': 'battlesnake-python!'
     }
 
