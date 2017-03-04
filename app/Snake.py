@@ -28,4 +28,3 @@ class Snake:
         #create a head
         self.head = self.coords[0]
         self.moves = self.get_moves(self.head)
-
