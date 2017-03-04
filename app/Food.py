@@ -9,4 +9,4 @@ class Food:
         #Set the X and Y coords to the corresponding tuples in foodpiece
         self.xCoord = foodPiece[0]
         self.yCoord = foodPiece[1]
-        return foodPiece[]
+        return foodPiece
