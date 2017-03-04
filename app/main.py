@@ -31,7 +31,8 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#00FF00',
+        #Chocolate brown all the way!
+        'color': '#331a00',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url,
         'tail_type': 'freckled',
@@ -43,8 +44,7 @@ def start():
 def move():
     data = bottle.request.json
 
-    board = Board(data)
-
+    # TODO: Do things with data
     directions = ['up', 'down', 'left', 'right']
 
     return {
@@ -56,4 +56,4 @@ def move():
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 if __name__ == '__main__':
-    bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
+    bottle.run(application, host=os.getenv('IP', '10.126.16.43'), port=os.getenv('PORT', '8080'))
