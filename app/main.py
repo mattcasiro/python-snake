@@ -46,12 +46,6 @@ def move():
 
     directions = ['up', 'down', 'left', 'right']
 
-
-    #return {
-    #    'move': 'left',
-    #    'taunt': 'battlesnake-python!'
-    #}
-
     return Decision.decide(board)
 
 
