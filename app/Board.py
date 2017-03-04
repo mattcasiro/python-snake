@@ -34,3 +34,9 @@ class Board:
             dead_snakes.append(Snake(raw_snake))
 
         return dead_snakes
+    
+    def get_bad_squares(self):
+        bad = self.our_snake.coords
+        for snake in self.snakes:
+            bad += snake.coords
+        return bad
