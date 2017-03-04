@@ -31,6 +31,6 @@ class Board:
         self.our_id = data['you']
 
         # Extract arrays
-        self.snakes, self.our_snake = get_live_snakes(data['snakes'])
-        self.dead_snakes = get_dead_snakes(data['dead_snakes'])
+        self.snakes, self.our_snake = self.get_live_snakes(data['snakes'])
+        self.dead_snakes = self.get_dead_snakes(data['dead_snakes'])
         self.foods = data['food']
