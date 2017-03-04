@@ -5,9 +5,9 @@ import random
 # pprint will allow pretty output of the complex data types below.
 # Usage: pp.pprint(stuff)
 import pprint
+import Food
 import Snake
 import Board
-import Food
 
 pp = pprint.PrettyPrinter(indent=4)
 

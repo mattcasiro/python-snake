@@ -1,4 +1,1 @@
-*.DS_Store
-*.pyc
-battlesnake
-.idea
+pushheroku*
