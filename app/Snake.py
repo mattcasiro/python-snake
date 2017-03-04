@@ -15,10 +15,12 @@ class Snake:
         self.length = len(coords)
 
         #create a head
-        self.head = coords[0]
+        self.head = self.coords[0]
 
         #assign left, right, up, and down variables
-        self.left = head[0] - 1
-        self.right = head[0] + 1
-        self.up = head[1] - 1
-        self.down = head[1] + 1
+        self.moves = {
+            [self.head[0] - 1, head[1]] : 'left', 
+            [self.head[0] + 1, head[1]] : 'right',
+            [head[0], head[1] - 1] : 'up',
+            [head[0], head[1] + 1] : 'down',
+        }
