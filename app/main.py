@@ -6,8 +6,6 @@ import random
 # Usage: pp.pprint(stuff)
 import Decision
 import pprint
-import Food
-import Snake
 import Board
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -48,13 +46,16 @@ def move():
 
     directions = ['up', 'down', 'left', 'right']
 
-    return {
-        'move': 'left',
-        'taunt': 'battlesnake-python!'
-    }
+
+    #return {
+    #    'move': 'left',
+    #    'taunt': 'battlesnake-python!'
+    #}
+
+    return Decision.decide(board)
 
 
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 if __name__ == '__main__':
-    bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8081'))
+    bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
