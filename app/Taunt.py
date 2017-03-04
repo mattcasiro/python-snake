@@ -11,6 +11,7 @@ class Taunt:
         taunt_file = open('../resources/taunts.txt', 'r')
         for line in taunt_file:
             self.taunt_array.append(line)
+        taunt_file.close()
 
     def grab_taunt(self):
         choice = randint(0,len(self.taunt_array) - 1)
