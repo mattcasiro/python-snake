@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import Snake
+import Food
+
 # Battlesnake 2017 
 # Casiro, Chan, Middleton
 # Board Class file 
@@ -9,16 +12,16 @@ class Board:
         snakes = []
         for raw_snake in raw_snakes:
             if raw_snake['id'] == self.our_id:
-                our_snake = Snake(raw_snake)
+                our_snake = Snake.Snake(raw_snake)
             else:
-                snakes.append(Snake(raw_snake))
+                snakes.append(Snake.Snake(raw_snake))
 
         return snakes, our_snake
 
     def get_dead_snakes(self, raw_snakes):
         dead_snakes = []
         for raw_snake in raw_snakes:
-            dead_snakes.append(Snake(raw_snake))
+            dead_snakes.append(Snake.Snake(raw_snake))
 
         return dead_snakes
     
