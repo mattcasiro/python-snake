@@ -4,7 +4,7 @@ import random
 
 # pprint will allow pretty output of the complex data types below.
 # Usage: pp.pprint(stuff)
-import Decide
+import Decision
 import pprint
 import Food
 import Snake
@@ -44,7 +44,7 @@ def start():
 def move():
     data = bottle.request.json
 
-    board = Board(data)
+    board = Board.Board(data)
 
     directions = ['up', 'down', 'left', 'right']
 
@@ -57,4 +57,4 @@ def move():
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
 if __name__ == '__main__':
-    bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
+    bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8081'))
