@@ -14,17 +14,23 @@ class Board:
         self.our_id = data['you']
 
         # Extract arrays
-        self.snakes, self.our_snake = get_snakes(data['snakes'])
-        self.dead_snakes = get_snakes(data['dead_snakes'])
-        self.foods = get_foods(data['food'])
+        self.snakes, self.our_snake = get_live_snakes(data['snakes'])
+        self.dead_snakes = get_dead_snakes(data['dead_snakes'])
+        self.foods = data['food']
 
-    def start(self):
-        pass
-
-    def get_snakes(raw_snakes):
+    def get_live_snakes(self, raw_snakes):
         snakes = []
         for raw_snake in raw_snakes:
             if raw_snake['id'] == self.our_id:
                 our_snake = Snake(raw_snake)
             else:
                 snakes.append(Snake(raw_snake))
+
+        return snakes, our_snake
+
+    def get_dead_snakes(self, raw_snakes):
+        dead_snakes = []
+        for raw_snake in raw_snakes:
+            dead_snakes.append(Snake(raw_snake))
+
+        return dead_snakes
