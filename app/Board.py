@@ -26,10 +26,13 @@ class Board:
         return dead_snakes
 
     def get_bad_squares(self):
-        # Snakes are bad!
+        # Don't hit ourselves
         bad = self.our_snake.coords
         for snake in self.snakes:
+            # Don't hit other snakes
             bad += snake.coords
+            # Avoid head-on collisions
+            bad += snake.moves.values()
 
         # Left/Right walls are bad!
         for i in range(self.height):
@@ -38,6 +41,9 @@ class Board:
         # Top/Bottom walls are bad!
         for i in range(self.width):
             bad += [[i, -1], [self.height, i]]
+
+        # DEBUG:
+        #print bad
 
         return bad
 
