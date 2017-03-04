@@ -1,16 +1,17 @@
 def decide(board):
-    snake = board.our_snake
+    our_snake = board.our_snake
     
     # bad_squares = getBadSquares()
-    valid_moves = [ 'left' : true,
-                    'right' : true,
-                    'up' : true,
-                    'down' : true]
+    valid_moves = { 'left': True,
+                    'right': True,
+                    'up': True,
+                    'down': True }
 
+    directions = ['left','right','up','down']
 
-    for spot, move in bad_squares:
-        if spot in snake.moves:
-            valid_moves[move] = false;
+    for direction in directions:
+        if our_snake.moves[direction] in board.get_bad_squares:
+            valid_moves[direction] = False
 
     
 
