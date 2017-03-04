@@ -26,9 +26,19 @@ class Board:
         return dead_snakes
 
     def get_bad_squares(self):
+        # Snakes are bad!
         bad = self.our_snake.coords
         for snake in self.snakes:
             bad += snake.coords
+
+        # Left/Right walls are bad!
+        for i in range(self.height):
+            bad += [[-1, i], [self.width, i]]
+
+        # Top/Bottom walls are bad!
+        for i in range(self.width):
+            bad += [[i, -1], [self.height, i]]
+
         return bad
 
     def __init__(self, data):
