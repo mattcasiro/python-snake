@@ -14,8 +14,11 @@ class Snake:
         self.taunt = data['taunt']
         self.length = len(coords)
 
+        #create a head
+        self.head = coords[0]
+
         #assign left, right, up, and down variables
-        self.left = coords[0][0] - 1
-        self.right = coords[0][0] + 1
-        self.up = coords[0][1] - 1
-        self.down = coords[0][1] + 1
+        self.left = head[0] - 1
+        self.right = head[0] + 1
+        self.up = head[1] - 1
+        self.down = head[1] + 1
