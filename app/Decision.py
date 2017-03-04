@@ -11,6 +11,7 @@ def decide(board):
     directions = ['left','right','up','down']
 
     for direction in directions:
+        # NOTE: call get_bad_squares() once if response time issue
         if our_snake.moves[direction] in board.get_bad_squares():
             valid_moves[direction] = False
 
