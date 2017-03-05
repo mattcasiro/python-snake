@@ -19,15 +19,13 @@ def decide(board):
 
 
     #check surrounding squares of each 'valid_move'
-    for direction in directions:
-        if valid_moves[direction] && [our_snake.moves[direction][0] - 1, our_snake.moves[direction][1]]:
-            valid_moves[direction] = False;
-        if valid_moves[direction] && [our_snake.moves[direction][0] + 1, our_snake.moves[direction][1]]:
-            valid_moves[direction] = False;
-        if valid_moves[direction] && [our_snake.moves[direction][0], our_snake.moves[direction][1] - 1]:
-            valid_moves[direction] = False;
-        if valid_moves[direction] && [our_snake.moves[direction][0], our_snake.moves[direction][1] + 1]:
-            valid_moves[direction] = False;
+    #for direction in directions:
+    #    if (valid_moves[direction] and 
+    #    ([our_snake.moves[direction][0] - 1, our_snake.moves[direction][1]] in board.get_bad_squares())):
+        #and [our_snake.moves[direction][0] + 1, our_snake.moves[direction][1]]
+        #and [our_snake.moves[direction][0], our_snake.moves[direction][1] - 1]
+        #and [our_snake.moves[direction][0], our_snake.moves[direction][1] + 1]
+        #    valid_moves[direction] = False;
     
 
     # preferred moves (like targeting food)
@@ -35,22 +33,27 @@ def decide(board):
                     'right': False,
                     'up': False,
                     'down': False }
-    # target food
-    if our_snake.head[0] < nearest_food[0]:
-        preferred_moves['right'] = True;
-    elif our_snake.head[0] > nearest_food[0]:
-        preferred_moves['left'] = True;
+    if our_snake.health < 30:
+        # target food
+        if our_snake.head[0] < nearest_food[0]:
+            preferred_moves['right'] = True;
+        elif our_snake.head[0] > nearest_food[0]:
+            preferred_moves['left'] = True;
 
-    if our_snake.head[1] < nearest_food[1]:
-        preferred_moves['down'] = True;
-    if our_snake.head[1] > nearest_food[1]:
-        preferred_moves['up'] = True;
+        if our_snake.head[1] < nearest_food[1]:
+            preferred_moves['down'] = True;
+        if our_snake.head[1] > nearest_food[1]:
+            preferred_moves['up'] = True;
+    else:
+        pass
+    
     print preferred_moves
     print valid_moves
 
     print(board.game_turn)
 
     #pick a move
+    choice = 'left'
     for move in valid_moves:
         if preferred_moves[move]:
             choice = move
