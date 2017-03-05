@@ -18,6 +18,18 @@ def decide(board):
             valid_moves[direction] = False
 
 
+    #check surrounding squares of each 'valid_move'
+    for direction in directions:
+        if valid_moves[direction] && [our_snake.moves[direction][0] - 1, our_snake.moves[direction][1]]:
+            valid_moves[direction] = False;
+        if valid_moves[direction] && [our_snake.moves[direction][0] + 1, our_snake.moves[direction][1]]:
+            valid_moves[direction] = False;
+        if valid_moves[direction] && [our_snake.moves[direction][0], our_snake.moves[direction][1] - 1]:
+            valid_moves[direction] = False;
+        if valid_moves[direction] && [our_snake.moves[direction][0], our_snake.moves[direction][1] + 1]:
+            valid_moves[direction] = False;
+    
+
     # preferred moves (like targeting food)
     preferred_moves = { 'left': False,
                     'right': False,
