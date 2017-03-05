@@ -27,7 +27,7 @@ class Board:
 
     def get_bad_squares(self):
         # Don't hit ourselves
-        bad = self.our_snake.coords[0:snake.length]
+        bad = self.our_snake.coords[0:our_snake.length]
         for snake in self.snakes:
             # Don't hit other snakes
             bad += snake.coords[0:snake.length]
