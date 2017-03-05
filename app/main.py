@@ -46,7 +46,8 @@ def move():
 
     directions = ['up', 'down', 'left', 'right']
 
-    return Decision.decide(board)
+    ret_val = Decision.decide(board)
+    return ret_val
 
 
 # Expose WSGI app (so gunicorn can find it)

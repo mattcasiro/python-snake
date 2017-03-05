@@ -70,7 +70,6 @@ class Board:
                 i += 1
             #put current snake's nearest food in dictionary of snake:nearestfoods
             nearest_foods[snake.id] = foods[nearest_index]
-        print nearest_foods
         return nearest_foods
 
 

@@ -96,11 +96,6 @@ def decide(board):
     else:
         pass
     
-    print preferred_moves
-    print valid_moves
-
-    print(board.game_turn)
-
     #pick a move
     choice = 'left'
     for move in valid_moves:
@@ -111,32 +106,20 @@ def decide(board):
             if valid_moves[move]:
                 choice = move
 
-    print choice
-
-    t1 = datetime.datetime.now()
     if board.game_turn == 0:
         choice = first_five(board)
-        print("first five returned {}" .format(choice))
     elif board.game_turn < 4:
         try:
             five_file = open('movefile.txt', 'r')
             move_list = []
             for move in five_file:
-                print("adding " + move)
                 move_list.append(move)
-            print("first five contained: {}" .format(move_list))
             choice = move_list[board.game_turn - 1]
             choice = choice[:-1]
-            print("first five chose: {}" .format(choice))
         except IOError as e:
             print(e)
         finally:
             five_file.close()
-
-    t2 = datetime.datetime.now()
-    td = t2 - t1
-    print(td.total_seconds())
-    print(choice)
 
     if board.game_turn > 0 and board.game_turn % 4 == 0:
         taunt = Taunt.Taunt()
