@@ -1,7 +1,7 @@
 import random, datetime
 def first_five():
     try:
-        five_file = open('../resources/movefile.txt', 'w')
+        five_file = open('movefile.txt', 'w')
         our_snake = board.our_snake
         
         valid_moves = { 'left': True,
@@ -30,10 +30,8 @@ def first_five():
         else:
             five_file.write('left\nup\nright')
             return 'down'
-
     except IOError as e:
         print(e)
-
     finally:
         five_file.close()
 
