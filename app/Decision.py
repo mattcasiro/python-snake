@@ -86,7 +86,7 @@ def decide(board):
         'taunt': our_snake.id
     }
 
-def first_five(self):
+def first_five():
     try:
         five_file = open('../resources/movefile.txt', 'w')
         our_snake = board.our_snake
