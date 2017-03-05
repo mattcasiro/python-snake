@@ -27,10 +27,10 @@ class Board:
 
     def get_bad_squares(self):
         # Don't hit ourselves
-        bad = self.our_snake.coords
+        bad = self.our_snake.coords[:self.our_snake.length]
         for snake in self.snakes:
             # Don't hit other snakes
-            bad += snake.coords
+            bad += snake.coords[:snake.length]
             # Avoid head-on collisions
             bad += snake.moves.values()
 
