@@ -1,4 +1,5 @@
 import random, datetime
+import Taunt
 def first_five(board):
     try:
         five_file = open('movefile.txt', 'w')
@@ -139,5 +140,5 @@ def decide(board):
     
     return {
         'move': choice,
-        'taunt': our_snake.id
+        'taunt': grab_taunt()
     }

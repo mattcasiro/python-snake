@@ -8,7 +8,7 @@ from random import randint
 
 class Taunt:
     def populate_array(self):
-        taunt_file = open('../resources/taunts.txt', 'r')
+        taunt_file = open('taunts.txt', 'r')
         for line in taunt_file:
             self.taunt_array.append(line)
         taunt_file.close()
