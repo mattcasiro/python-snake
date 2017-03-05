@@ -121,7 +121,7 @@ def decide(board):
         finally:
             five_file.close()
 
-    if board.game_turn > 0 and board.game_turn % 4 == 0:
+    if board.game_turn > 0 and board.game_turn % 8 == 0:
         taunt = Taunt.Taunt()
         taunt_choice = taunt.grab_taunt()
     else:
