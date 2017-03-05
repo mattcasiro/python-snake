@@ -31,11 +31,11 @@ def start():
 
     return {
         #Chocolate brown all the way!
-        'color': '#331a00',
+        'color': '#663300',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
-        'head_url': head_url,
+        'head_url': '../resources/noodlesnake.jpg',
         'tail_type': 'freckled',
-        'name': 'battlesnake-python'
+        'name': 'NoodleSnake'
     }
 
 
