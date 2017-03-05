@@ -138,7 +138,8 @@ def decide(board):
     print(td.total_seconds())
     print(choice)
     
+    taunt = Taunt.Taunt()
     return {
         'move': choice,
-        'taunt': grab_taunt()
+        'taunt': taunt.grab_taunt()
     }
