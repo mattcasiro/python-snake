@@ -137,9 +137,14 @@ def decide(board):
     td = t2 - t1
     print(td.total_seconds())
     print(choice)
-    
-    taunt = Taunt.Taunt()
+
+    if board.game_turn > 0 and board.game_turn % 4 == 0:
+        taunt = Taunt.Taunt()
+        taunt_choice = taunt.grab_taunt()
+    else:
+        taunt_choice = board.our_snake.taunt
+        
     return {
         'move': choice,
-        'taunt': taunt.grab_taunt()
+        'taunt': taunt_choice
     }
