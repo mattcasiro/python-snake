@@ -33,7 +33,7 @@ def start():
         #Chocolate brown all the way!
         'color': '#663300',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
-        'head_url': '../resources/noodlesnake.jpg',
+        'head_url': 'http://i.imgur.com/UDBnFGo.jpg',
         'tail_type': 'freckled',
         'name': 'NoodleSnake'
     }
