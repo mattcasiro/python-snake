@@ -1,5 +1,5 @@
 import random, datetime
-def first_five():
+def first_five(board):
     try:
         five_file = open('movefile.txt', 'w')
         our_snake = board.our_snake
@@ -19,16 +19,28 @@ def first_five():
         #Noodle will turtle up and go into a sqaure move pattern for
         #the first few turns. Movement depends on which X and Y directions are clear
         if valid_moves['up'] and valid_moves['right']:
-            five_file.write('right\ndown\nleft')
+            #five_file.write('right\ndown\nleft')
+            five_file.write('right\n')
+            five_file.write('down\n')
+            five_file.write('left\n')
             return 'up'
         elif valid_moves['up'] and valid_moves['left']:
-            five_file.write('left\ndown\nright')
+            #five_file.write('left\ndown\nright')
+            five_file.write('left\n')
+            five_file.write('down\n')
+            five_file.write('right\n')
             return 'up'
         elif valid_moves['down'] and valid_moves['right']:
-            five_file.write('right\nup\nleft')
+            #five_file.write('right\nup\nleft')
+            five_file.write('right\n')
+            five_file.write('up\n')
+            five_file.write('left\n')
             return 'down'
         else:
-            five_file.write('left\nup\nright')
+            #five_file.write('left\nup\nright')
+            five_file.write('left\n')
+            five_file.write('up\n')
+            five_file.write('right\n')
             return 'down'
     except IOError as e:
         print(e)
@@ -87,14 +99,19 @@ def decide(board):
 
     t1 = datetime.datetime.now()
     if board.game_turn == 0:
-        choice = first_five()
+        choice = first_five(board)
+        print("first five returned {}" .format(choice))
     elif board.game_turn < 4:
         try:
-            five_file = open('../resources/movefile.txt', 'r')
+            five_file = open('movefile.txt', 'r')
             move_list = []
             for move in five_file:
-                move_list += move
+                print("adding " + move)
+                move_list.append(move)
+            print("first five contained: {}" .format(move_list))
             choice = move_list[board.game_turn - 1]
+            choice = choice[:-1]
+            print("first five chose: {}" .format(choice))
         except IOError as e:
             print(e)
         finally:
