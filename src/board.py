@@ -5,14 +5,13 @@ class Board:
     snakes and food in a game"""
     def __init__(self, data):
         self._data = data
-        return
 
     @property
     def snake_list(self):
         """snake_list retreives the list of snakes from the board data"""
-        return self._data.snakeList
+        return self._data['snakes']
 
     @property
     def food_list(self):
         """food_list retreives the list of food from the board data"""
-        return self._data.foodList
+        return self._data['food']
