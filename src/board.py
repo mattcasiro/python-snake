@@ -1,4 +1,4 @@
-""" Board Module """
+"""Board Module"""
 
 class Board:
     """Track the cooardinates for all snakes and food in the game."""
