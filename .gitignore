@@ -3,5 +3,5 @@
 battlesnake
 .idea
 .pytest_cache
-.python-version
+.mypy_cache
 *.swp
