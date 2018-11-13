@@ -6,7 +6,7 @@ from api import *
 
 
 @bottle.route('/')
-def static():
+def root():
     return "the server is running"
 
 
