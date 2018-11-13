@@ -1,3 +1,6 @@
+from src.coordinate import Coordinate
+from typing import List
+
 class Snake:
     def __init__(self, data):
         self._data = data
@@ -8,11 +11,18 @@ class Snake:
 
     @property
     def coordinates(self):
-        return self._data['coords']
+        if self.coordinates is not None:
+            return self.coordinates
+
+        coordinates = []
+        for coordinate_tuple in self._data['coords']:
+            coordinates.append(Coordinate(coordinate_tuple))
+
+        return coordinates
 
     @property
     def head(self):
-        return self.coordinates[0]
+        return Coordinate(self.coordinates[0])
 
     @property
     def body(self):
@@ -21,3 +31,6 @@ class Snake:
     @property
     def health(self):
         return self._data['health_points']
+
+    def contains_coordinate(self, coordinate):
+        return coordinate in self.coordinates
