@@ -1,5 +1,6 @@
 import pytest
 from src.snake import Snake
+from src.coordinate import Coordinate
 
 class TestSnake:
     def get_snake(self):
@@ -27,3 +28,15 @@ class TestSnake:
     def test_snake_has_coordinates(self):
         snake = self.get_snake()
         assert snake.coordinates == [(10,15),(11,15),(11,16),(11,17)]
+
+    def test_snake_can_tell_if_contains_coordinates(self):
+        snake = self.get_snake()
+
+        coordinate = Coordinate((9,15))
+        assert snake.contains_coordinate(coordinate) == False
+
+        coordinate = Coordinate((10,14))
+        assert snake.contains_coordinate(coordinate) == False
+
+        coordinate = Coordinate((10,15))
+        assert snake.contains_coordinate(coordinate) == True
