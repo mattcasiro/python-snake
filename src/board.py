@@ -11,6 +11,7 @@ class Board:
     def snakes(self):
         """Retreive the list of snakes from the board data."""
         return self._data['snakes']
+        #TODO: convert to return object being a Snake instance
 
     @property
     def foods(self):
@@ -28,3 +29,7 @@ class Board:
                    or coordinate.y == -1 or coordinate.y == self.width)
         is_in_bounds = not is_wall
         return is_in_bounds
+
+    def get_other_snakes(self, exclude_id):
+        """Get the List of Snakes whose IDs don't match the given ID."""
+        #TODO: implement this function
