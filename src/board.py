@@ -10,8 +10,12 @@ class Board:
     @property
     def snakes(self):
         """Retreive the list of snakes from the board data."""
-        return self._data['snakes']
-        #TODO: convert to return object being a Snake instance
+        if not self._snakes:
+            snakes = []
+            for snakeData in self._data['snakes']:
+                snakes.append(Snake(snakeData, self))
+            self._snakes = snakes
+        return self._snakes
 
     @property
     def foods(self):
@@ -32,4 +36,4 @@ class Board:
 
     def get_other_snakes(self, exclude_id):
         """Get the List of Snakes whose IDs don't match the given ID."""
-        #TODO: implement this function
+        return [snake for snake in self.snakes if snake.id != exclude_id]

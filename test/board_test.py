@@ -29,6 +29,7 @@ class TestBoard:
             "health": 10,
             "id": "asdf1234"
         }]
+        #TODO: update to use list of actual snakes
 
     def test_board_has_foods(self):
         assert self.get_board().foods == [
