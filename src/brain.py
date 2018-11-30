@@ -13,7 +13,7 @@ class Brain:
         self.foods = foods
         self.board = board
 
-    def get_valid_moves(self): -> List[str]:
+    def get_valid_moves(self) -> List[str]:
         """Return the moves which won't immediately get the snake killed."""
         moves = ["left", "right", "up", "down"]
         valid_moves = []
