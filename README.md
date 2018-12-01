@@ -1,16 +1,14 @@
-# starter-snake-python
+# Python-Snake
 
-A simple [Battlesnake AI](http://battlesnake.io) written in Python. 
+![python version](https://img.shields.io/badge/Python-3.7.7-brightgreen.svg)
 
-Visit [https://github.com/battlesnakeio/community/blob/master/starter-snakes.md](https://github.com/battlesnakeio/community/blob/master/starter-snakes.md) for API documentation and instructions for running your AI.
+A [Battlesnake AI](http://battlesnake.io) written in Python 3, based off the [python-starter-snake](https://github.com/battlesnakeio/starter-snake-python).
 
 This AI client uses the [bottle web framework](http://bottlepy.org/docs/dev/index.html) to serve requests and the [gunicorn web server](http://gunicorn.org/) for running bottle on Heroku. Dependencies are listed in [requirements.txt](requirements.txt).
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
 #### You will need...
 
-* a working Python 2.7 development environment ([getting started guide](http://hackercodex.com/guide/python-development-environment-on-mac-osx/))
+* a working Python 3.7 development environment ([getting started guide](http://hackercodex.com/guide/python-development-environment-on-mac-osx/))
 * experience [deploying Python apps to Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#introduction)
 * [pip](https://pip.pypa.io/en/latest/installing.html) to install Python dependencies
 
@@ -28,7 +26,13 @@ git clone git@github.com:username/battlesnake-python.git
 pip install -r requirements.txt
 ```
 
-4) Run local server:
+4) Run unit tests
+```
+pip install -r requirements.dev.txt
+pytest
+```
+
+5) Run local server:
 ```
 python app/main.py
 ```
@@ -58,6 +62,7 @@ or visit [http://APP_NAME.herokuapp.com](http://APP_NAME.herokuapp.com).
 heroku logs --tail
 ```
 
-## Questions?
+## Contributors
 
-Email [battlesnake@sendwithus.com](mailto:battlesnake@sendwithus.com), or tweet [@send_with_us](http://twitter.com/send_with_us).
+* Jared Middleton (<jaredmiddleton3.14@gmail.com>)
+* Matthew Casiro (<mattcasiro@gmail.com>)
