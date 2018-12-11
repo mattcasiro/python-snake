@@ -1,0 +1,32 @@
+{
+    "game": {
+        "id": "sd5m-12jkj-1kk4n2-66ma"
+    },
+    "turn": 0,
+    "board": {
+        "height": 10,
+        "width": 10,
+        "food": [{
+            "x": 2,
+            "y": 2
+        }],
+        "snakes": [{
+            "id": 415,
+            "name": "Inclusif_Snek",
+            "health": 87,
+            "body": [{
+                "x": 5,
+                "y": 2
+            }]
+        }]
+    },
+    "you": {
+        "id": 415,
+        "name": "Inclusif_Snek",
+        "health": "87,
+        "body": [{
+            "x": 5,
+            "y": 2
+        }]
+    }
+}
