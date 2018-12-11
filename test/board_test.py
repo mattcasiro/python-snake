@@ -26,11 +26,6 @@ class TestBoard:
 
     def test_board_has_snakes(self):
         board = self.get_board()
-        assert board.snakes[0] == Snake({ 
-            "coords": [(2, 2), (2,3), (3,3)],
-            "health": 10,
-            "id": "asdf1234"
-        })
         assert board.snakes == [Snake({
             "coords": [(2, 2), (2,3), (3,3)],
             "health": 10,
