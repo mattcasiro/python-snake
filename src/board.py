@@ -1,26 +1,36 @@
 """Board Module"""
-from typing import Tuple
+from typing import Tuple, List
 from src.coordinate import Coordinate
+from src.snake import Snake
 
 class Board:
     """Track the cooardinates for all snakes and food in the game."""
     def __init__(self, data):
         self._data = data
+        self._snakes = None
+        self._foods = None
 
     @property
-    def snakes(self):
+    def snakes(self) -> List[Snake]:
         """Retreive the list of snakes from the board data."""
-        if not self._snakes:
+        if self._snakes is None:
             snakes = []
-            for snakeData in self._data['snakes']:
-                snakes.append(Snake(snakeData, self))
+            for snake_data in self._data['snakes']:
+                snakes.append(Snake(snake_data))
             self._snakes = snakes
         return self._snakes
 
     @property
-    def foods(self):
+    def foods(self) -> List[Coordinate]:
         """Retreive the list of food from the board data."""
-        return self._data['food']
+        if not self._foods or len(self.foods) <= 0:
+            foods = []
+            for food_data in self._data['food']:
+                foods.append(Coordinate(food_data))
+
+            self._foods = foods
+        return self._foods
+        #return self._data['food']
 
     @property
     def width(self):
