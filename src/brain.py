@@ -1,17 +1,18 @@
 """Brain Module"""
+import math # type: ignore
+from typing import List
 from src.snake import Snake
 from src.board import Board
 from src.coordinate import Coordinate
-from typing import List
 
 
 class Brain:
     """Control which move the snake makes."""
-    def __init__(self, me: Snake, other_snakes: List[Snake], foods: List[Coordinate], board: Board):
-        self.me = me
-        self.other_snakes = other_snakes
-        self.foods = foods
-        self.board = board
+    def __init__(self, my_id: str, board: Board):
+        self.board: Board = board
+        self.my_id: str = my_id
+        self.other_snakes: List[Snake] = self.board.get_other_snakes(my_id)
+        self.me: Snake = next((snake for snake in self.board.snakes if snake.id == my_id))
 
     def get_valid_moves(self) -> List[str]:
         """Return the moves which won't immediately get the snake killed."""
@@ -19,7 +20,7 @@ class Brain:
         valid_moves = []
 
         for move in moves:
-            move_coordinate = getattr(self.me.head, "get_"+move)
+            move_coordinate = getattr(self.me.head, "get_"+move)()
 
             if not self.board.is_coordinate_in_bounds(move_coordinate):
                 continue
@@ -28,7 +29,9 @@ class Brain:
             for snake in self.other_snakes:
                 if snake.contains_coordinate(move_coordinate):
                     is_collision = True
-                    break
+
+            if self.me.contains_coordinate(move_coordinate):
+               is_collision = True
 
             if is_collision:
                 continue
@@ -37,16 +40,19 @@ class Brain:
 
         return valid_moves
 
-    def get_nearest_food(self):
+    def get_nearest_food(self) -> Coordinate:
         """Get the food item which has coordinates closest to this snake's head."""
-        closest_food = (None, 9999)
+        closest_food = (Coordinate((0,0)), 9999.0)
 
-        for food in self.foods:
-            distance = self.me.head
-            if closest_food[0] is None or distance < closest_food[1]:
+        for food in self.board.foods:
+            x_diff = self.me.head.x - food.x 
+            y_diff = self.me.head.y - food.y
+            distance = math.sqrt( x_diff * x_diff + y_diff * y_diff )
+
+            if distance < closest_food[1]:
                 closest_food = (food, distance)
 
         if closest_food[0] is None:
             return None
 
-        return closest_food
+        return closest_food[0]
