@@ -15,7 +15,7 @@ class Snake:
         return self.id == other.id
 
     def __str__(self) -> str:
-        return str(self.id) + "; " + str(self.health)# + "; " + str(self.head.x) +","+ str(self.head.y)
+        return str(self.id) + "; " + str(self.health)
 
     @property
     def id(self) -> str:
@@ -25,13 +25,8 @@ class Snake:
     @property
     def coordinates(self) -> List[Coordinate]:
         """Get the List of Coordinates which describes the location of this Snake."""
-        if self._coordinates is not None and len(self._coordinates) > 0:
-            return self._coordinates
-
-        self._coordinates = []
-        for coordinate_tuple in self._data['coords']:
-            self._coordinates.append(Coordinate(coordinate_tuple))
-
+        if not self._coordinates or len(self._coordinates) < 1:
+            self._coordinates = [Coordinate(coordinate_tuple) for coordinate_tuple in self._data['coords']]
         return self._coordinates
 
     @property
@@ -45,7 +40,7 @@ class Snake:
         return self.coordinates[1:]
 
     @property
-    def health(self):
+    def health(self) -> int:
         """Get the number of health points this Snake currently has."""
         return self._data['health']
 

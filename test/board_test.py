@@ -16,9 +16,9 @@ class TestBoard:
             (6, 12)
         ]
         return Board({
-            "snakes" : snakes,
-            "food"  : foods,
-            "width" : width
+            "snakes": snakes,
+            "food": foods,
+            "width": width
         })
 
     def test_create_board(self):

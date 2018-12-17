@@ -16,10 +16,10 @@ class TestBrain:
             ((6, 12))
         ]
         board = Board({
-            "snakes" : snakes,
-            "food"  : foods,
-            "width" : width,
-            "height" : width,
+            "snakes": snakes,
+            "food": foods,
+            "width": width,
+            "height": width,
         })
         return Brain("asdf1234", board)
 

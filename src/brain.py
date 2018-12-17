@@ -18,24 +18,12 @@ class Brain:
         """Return the moves which won't immediately get the snake killed."""
         moves = ["left", "right", "up", "down"]
         valid_moves = []
+        collision_coordinates = [snake_coordinate for snake in self.board.snakes for snake_coordinate in snake.coordinates]
 
         for move in moves:
             move_coordinate = getattr(self.me.head, "get_"+move)()
-
-            if not self.board.is_coordinate_in_bounds(move_coordinate):
+            if not self.board.is_coordinate_in_bounds(move_coordinate) or move_coordinate in collision_coordinates:
                 continue
-
-            is_collision = False
-            for snake in self.other_snakes:
-                if snake.contains_coordinate(move_coordinate):
-                    is_collision = True
-
-            if self.me.contains_coordinate(move_coordinate):
-               is_collision = True
-
-            if is_collision:
-                continue
-
             valid_moves.append(move)
 
         return valid_moves
@@ -45,7 +33,7 @@ class Brain:
         closest_food = (Coordinate((0,0)), 9999.0)
 
         for food in self.board.foods:
-            x_diff = self.me.head.x - food.x 
+            x_diff = self.me.head.x - food.x
             y_diff = self.me.head.y - food.y
             distance = math.sqrt( x_diff * x_diff + y_diff * y_diff )
 
