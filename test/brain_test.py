@@ -23,7 +23,6 @@ class TestBrain:
             "height": width,
         })
         return Brain(board.snakes[0].id, board)
-        #return Brain("asdf1234", board)
 
     def test_brain_can_get_nearest_food(self):
         brain = self.get_brain(self.snakes, self.foods, self.width)
