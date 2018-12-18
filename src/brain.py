@@ -22,9 +22,8 @@ class Brain:
 
         for move in moves:
             move_coordinate = getattr(self.me.head, "get_"+move)()
-            if not self.board.is_coordinate_in_bounds(move_coordinate) or move_coordinate in collision_coordinates:
-                continue
-            valid_moves.append(move)
+            if self.board.is_coordinate_in_bounds(move_coordinate) and move_coordinate not in collision_coordinates:
+                valid_moves.append(move)
 
         return valid_moves
 
