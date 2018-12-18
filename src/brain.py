@@ -1,6 +1,6 @@
 """Brain Module"""
 import math # type: ignore
-from typing import List
+from typing import List, Optional
 from src.snake import Snake
 from src.board import Board
 from src.coordinate import Coordinate
@@ -28,7 +28,7 @@ class Brain:
 
         return valid_moves
 
-    def get_nearest_food(self) -> Coordinate:
+    def get_nearest_food(self) -> Optional[Coordinate]:
         """Get the food item which has coordinates closest to this snake's head."""
         closest_food = (Coordinate((0,0)), 9999.0)
 
@@ -40,7 +40,7 @@ class Brain:
             if distance < closest_food[1]:
                 closest_food = (food, distance)
 
-        if closest_food[0] is None:
+        if closest_food[1] == 9999.0:
             return None
 
         return closest_food[0]

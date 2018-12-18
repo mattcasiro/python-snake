@@ -21,9 +21,8 @@ class Board:
     @property
     def foods(self) -> List[Coordinate]:
         """Retreive the list of food from the board data."""
-        if not self._foods or len(self.foods) < 1:
-            foods = [Coordinate(food_data) for food_data in self._data['food']]
-            self._foods = foods
+        if not self._foods or len(self._foods) < 1:
+            self._foods = [Coordinate(food_data) for food_data in self._data['food']]
         return self._foods
 
     @property

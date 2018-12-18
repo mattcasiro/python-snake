@@ -1,12 +1,12 @@
 """Snake Module"""
-from typing import List
+from typing import List, Optional
 from src.coordinate import Coordinate
 
 class Snake:
     """Define properties and functionality of a Snake."""
     def __init__(self, data: dict):
         self._data = data
-        self._coordinates: List[Coordinate] = []
+        self._coordinates: Optional[List[Coordinate]] = None
 
     def __eq__(self, other: object) -> bool:
         """Return true if the snake id, health, and coordinates match."""
@@ -25,7 +25,7 @@ class Snake:
     @property
     def coordinates(self) -> List[Coordinate]:
         """Get the List of Coordinates which describes the location of this Snake."""
-        if not self._coordinates or len(self._coordinates) < 1:
+        if not self._coordinates:
             self._coordinates = [Coordinate(coordinate_tuple) for coordinate_tuple in self._data['coords']]
         return self._coordinates
 

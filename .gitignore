@@ -4,4 +4,5 @@ battlesnake
 .idea
 .pytest_cache
 .mypy_cache
+.coverage
 *.swp
