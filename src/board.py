@@ -13,7 +13,7 @@ class Board:
     @property
     def snakes(self) -> List[Snake]:
         """Retreive the list of snakes from the board data."""
-        if not self._snakes or len(self._snakes) < 1:
+        if not self._snakes:
             snakes = [Snake(snake_data) for snake_data in self._data['snakes']]
             self._snakes = snakes
         return self._snakes
@@ -21,7 +21,7 @@ class Board:
     @property
     def foods(self) -> List[Coordinate]:
         """Retreive the list of food from the board data."""
-        if not self._foods or len(self._foods) < 1:
+        if not self._foods:
             self._foods = [Coordinate(food_data) for food_data in self._data['food']]
         return self._foods
 
