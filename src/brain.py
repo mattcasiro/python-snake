@@ -18,7 +18,7 @@ class Brain:
         """Return the moves which won't immediately get the snake killed."""
         moves = ["left", "right", "up", "down"]
         valid_moves = []
-        collision_coordinates = [snake_coordinate for snake in self.board.snakes for snake_coordinate in snake.coordinates]
+        collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates]
 
         for move in moves:
             move_coordinate = getattr(self.me.head, "get_"+move)()
