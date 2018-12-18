@@ -22,6 +22,9 @@ class Coordinate(object):
             return NotImplemented
         return self.x != other.x or self.y != other.y
 
+    def __str__(self) -> str:
+        return "(" + str(self.x) +","+ str(self.y) + ")"
+
     @property
     def x(self) -> int:
         """Return the x value of the coordinate."""
