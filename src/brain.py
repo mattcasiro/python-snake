@@ -48,6 +48,5 @@ class Brain:
     def get_threatening_snakes_moves(self) -> List[Coordinate]:
         """Get the coordinates which will result in head-on collisions.""" 
         #note, we can ignore snakes smaller than us.
-
         danger_snakes = [snake for snake in self.board.get_other_snakes(self.my_id) if len(snake.coordinates) >= len(self.me.coordinates)]
         return [snake_moves for snake in danger_snakes for snake_moves in snake.get_all_moves()]
