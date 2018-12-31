@@ -8,6 +8,7 @@ class Coordinate(object):
 
     def __init__(self, coordinate: Tuple[int, int]) -> None:
         """Instantiate Coordinate with x and y values."""
+        #TODO: add overload constructor which just takes two ints instead of a tuple?
         self._coordinate: Tuple[int, int] = coordinate
 
     def __eq__(self, other: object) -> bool:
