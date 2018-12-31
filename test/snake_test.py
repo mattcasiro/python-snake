@@ -49,3 +49,17 @@ class TestSnake:
 
         coordinate = Coordinate((10,15))
         assert snake.contains_coordinate(coordinate) == True
+
+    def test_snake_can_get_all_moves(self):
+        snake = self.get_snake()
+
+        all_moves = [
+            Coordinate((9,15)),
+            Coordinate((11,15)),
+            Coordinate((10,14)),
+            Coordinate((10,16))
+        ]
+
+        assert snake.get_all_moves() == all_moves
+
+

@@ -47,3 +47,8 @@ class Snake:
     def contains_coordinate(self, coordinate) -> bool:
         """Get whether or not the given Coordinate is within this Snake."""
         return coordinate in self.coordinates
+
+    def get_all_moves(self) -> List[Coordinate]:
+        """Get list of coordinates for left, right, up, down, of the snake's head - regardless of whether or not it kills the snake."""
+        all_moves = ["left", "right", "up", "down"]
+        return [getattr(self.head, "get_"+move)() for move in all_moves]

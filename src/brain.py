@@ -19,6 +19,7 @@ class Brain:
         moves = ["left", "right", "up", "down"]
         valid_moves = []
         collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates]
+        collision_coordinates = collision_coordinates + self.get_threatening_snakes_moves()
 
         for move in moves:
             move_coordinate = getattr(self.me.head, "get_"+move)()
@@ -43,3 +44,9 @@ class Brain:
             return None
 
         return closest_food[0]
+
+    def get_threatening_snakes_moves(self) -> List[Coordinate]:
+        """Get the coordinates which will result in head-on collisions.""" 
+        #note, we can ignore snakes smaller than us.
+        danger_snakes = [snake for snake in self.board.get_other_snakes(self.my_id) if len(snake.coordinates) >= len(self.me.coordinates)]
+        return [snake_moves for snake in danger_snakes for snake_moves in snake.get_all_moves()]
