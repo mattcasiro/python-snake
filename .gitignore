@@ -6,3 +6,4 @@ battlesnake
 .mypy_cache
 .coverage
 *.swp
+config.ini

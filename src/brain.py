@@ -8,7 +8,7 @@ from src.coordinate import Coordinate
 
 class Brain:
     """Control which move the snake makes."""
-    def __init__(self, my_id: str, board: Board):
+    def __init__(self, my_id: str, board: Board) -> None:
         self.board: Board = board
         self.my_id: str = my_id
         self.other_snakes: List[Snake] = self.board.get_other_snakes(my_id)
