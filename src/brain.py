@@ -14,6 +14,23 @@ class Brain:
         self.other_snakes: List[Snake] = self.board.get_other_snakes(my_id)
         self.me: Snake = next((snake for snake in self.board.snakes if snake.id == my_id))
 
+    def get_decision(self) -> str:
+        """Get the move which the snake will make this turn."""
+        moves_to_food = self.get_moves_for_nearest_food()
+        valid_moves = self.get_valid_moves()
+
+        if not valid_moves:
+            return "left"
+
+        if moves_to_food:
+            decision = next((move for move in moves_to_food if move in valid_moves), None)
+
+        if not decision:
+            return valid_moves[0]
+
+        return decision
+
+
     def get_valid_moves(self) -> List[str]:
         """Return the moves which won't immediately get the snake killed."""
         moves = ["left", "right", "up", "down"]
@@ -50,3 +67,22 @@ class Brain:
         #note, we can ignore snakes smaller than us.
         danger_snakes = [snake for snake in self.board.get_other_snakes(self.my_id) if len(snake.coordinates) >= len(self.me.coordinates)]
         return [snake_moves for snake in danger_snakes for snake_moves in snake.get_all_moves()]
+
+    def get_moves_for_nearest_food(self) -> Optional[List[str]]:
+        """Get move options for getting to nearest food"""
+        nearest_food = self.get_nearest_food()
+        if nearest_food is None:
+            return None
+
+        options = []
+        x_diff = nearest_food.x - self.me.head.x
+        y_diff = nearest_food.y - self.me.head.y
+
+        if x_diff != 0:
+            options.append("left" if x_diff < 0 else "right")
+        if y_diff != 0:
+            options.append("up" if y_diff < 0 else "down")
+        if not options:
+            return None
+
+        return options
