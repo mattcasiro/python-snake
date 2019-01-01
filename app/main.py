@@ -1,63 +1,55 @@
-import bottle
 import os
+import sys
 import random
+from bottle import debug, default_app, post, request, route, run
+from configparser import ConfigParser
 
-from api import *
+from app import api
 
+config = ConfigParser()
+config.read('config.ini')
+if 'APP_ENV' not in config['DEFAULT']:
+    print('Missing required configurations, server shutting down.')
+    sys.exit()
 
-@bottle.route('/')
-def root():
-    return "the server is running"
+@post('/ping')
+def ping():
+    return api.ping_response()
 
-
-@bottle.route('/static/<path:path>')
-def static(path):
-    return bottle.static_file(path, root='static/')
-
-
-@bottle.post('/start')
+@post('/start')
 def start():
-    data = bottle.request.json
-
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
-
-    # TODO: Do things with data
-
+    data = request.json
     print ("Starting game %s" % data["game"]["id"])
-    return StartResponse("#00ff00")
+    return api.start_response("#00ff00")
 
 
-@bottle.post('/move')
+@post('/move')
 def move():
-    data = bottle.request.json
+    data = request.json
 
     # TODO: Do things with data
-    
+
     directions = ['up', 'down', 'left', 'right']
     direction = 'right'#random.choice(directions)
 
     print ("Moving %s" % direction)
-    return MoveResponse(direction)
+    return api.move_response(direction)
 
 
-@bottle.post('/end')
+@post('/end')
 def end():
-    data = bottle.request.json
-
-    # TODO: Do things with data
-
+    data = request.json
     print ("Game %s ended" % data["game"]["id"])
+    return api.end_response()
 
 
 # Expose WSGI app (so gunicorn can find it)
-application = bottle.default_app()
+app = default_app()
 
 if __name__ == '__main__':
-    bottle.run(
-        application,
+    run(app,
         host=os.getenv('IP', '0.0.0.0'),
         port=os.getenv('PORT', '8080'),
-        debug=True)
+        reloader=(config['DEFAULT']['APP_ENV'] != 'production'),
+        debug=(config['DEFAULT']['APP_ENV'] != 'production')
+    )

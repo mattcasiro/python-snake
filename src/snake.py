@@ -4,7 +4,7 @@ from src.coordinate import Coordinate
 
 class Snake:
     """Define properties and functionality of a Snake."""
-    def __init__(self, data: dict):
+    def __init__(self, data: dict) -> None:
         self._data = data
         self._coordinates: Optional[List[Coordinate]] = None
 

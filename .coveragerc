@@ -1,6 +1,8 @@
 [run]
 branch = True
-source = src
+source =
+    src
+    app
 
 [report]
 fail_under = 90
