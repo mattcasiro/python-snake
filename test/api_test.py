@@ -13,29 +13,23 @@ class TestApi:
         assert response.status == '200 OK'
 
     def test_start(self, app):
-        json = {
-            'game': {
-                'id': '1234abcd'
-            }
-        }
-        response = app.post_json('/start', json)
+        with open('./test/example_data_filled.json') as f:
+            data = json.load(f)
+
+        response = app.post_json('/start', data)
         assert response.status == '200 OK'
 
     def test_move(self, app):
-        json = {
-            'game': {
-                'id': '1234abcd'
-            }
-        }
-        response = app.post_json('/move', json)
+        with open('./test/example_data_filled.json') as f:
+            data = json.load(f)
+
+        response = app.post_json('/move', data)
         assert response.status == '200 OK'
 
     def test_end(self, app):
-        json = {
-            'game': {
-                'id': '1234abcd'
-            }
-        }
-        response = app.post_json('/end', json)
+        with open('./test/example_data_filled.json') as f:
+            data = json.load(f)
+
+        response = app.post_json('/end', data)
         assert response.status == '200 OK'
 

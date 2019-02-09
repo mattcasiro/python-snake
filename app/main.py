@@ -3,8 +3,11 @@ import sys
 import random
 from bottle import debug, default_app, post, request, route, run
 from configparser import ConfigParser
+from typing import DefaultDict, Any
 
 from app import api
+from src.board import Board
+from src.brain import Brain
 
 config = ConfigParser()
 config.read('config.ini')
@@ -18,23 +21,22 @@ def ping():
 
 @post('/start')
 def start():
-    data = request.json
-    print ("Starting game %s" % data["game"]["id"])
-    return api.start_response("#00ff00")
+    data: Any = request.json
+    print("Starting game %s" % data["game"]["id"])
+    return api.start_response("ffb6c1")
 
 
 @post('/move')
 def move():
     data = request.json
 
-    # TODO: Do things with data
 
-    directions = ['up', 'down', 'left', 'right']
-    direction = 'right'#random.choice(directions)
+    board = Board(data["board"])
+    brain = Brain(data["you"]["id"], board)
 
-    print ("Moving %s" % direction)
-    return api.move_response(direction)
-
+    decision = brain.get_decision()
+    print(decision)
+    return api.move_response(decision)
 
 @post('/end')
 def end():

@@ -26,7 +26,7 @@ class Snake:
     def coordinates(self) -> List[Coordinate]:
         """Get the List of Coordinates which describes the location of this Snake."""
         if not self._coordinates:
-            self._coordinates = [Coordinate(coordinate_tuple) for coordinate_tuple in self._data['coords']]
+            self._coordinates = [Coordinate(coordinate_tuple, None) for coordinate_tuple in self._data['body']]
         return self._coordinates
 
     @property
