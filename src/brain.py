@@ -9,6 +9,7 @@ from src.coordinate import Coordinate
 class Brain:
     """Control which move the snake makes."""
     def __init__(self, my_id: str, board: Board) -> None:
+        self.hunger_threshold = 45
         self.board: Board = board
         self.my_id: str = my_id
         self.other_snakes: List[Snake] = self.board.get_other_snakes(my_id)
@@ -20,10 +21,15 @@ class Brain:
         valid_moves = self.get_valid_moves()
 
         if not valid_moves:
-            return "left"
+            return self.follow_tail()[0]
 
-        if moves_to_food:
-            decision = next((move for move in moves_to_food if move in valid_moves), None)
+        if self.me.health < self.hunger_threshold:
+            if moves_to_food:
+                decision = next((move for move in moves_to_food if move in valid_moves), None)
+        else:
+            loop_moves = self.follow_tail()
+            if loop_moves:
+                decision = next((move for move in loop_moves if move in valid_moves), None)
 
         if not decision:
             return valid_moves[0]
@@ -84,5 +90,32 @@ class Brain:
             options.append("up" if y_diff < 0 else "down")
         if not options:
             return None
+
+        return options
+
+    def follow_tail(self) -> List[str]:
+        """Get moves for getting to tail."""
+        tail = self.me.coordinates[len(self.me.coordinates) - 1]
+        return self.get_moves_to(tail)
+
+    def get_moves_to(self, coord: Coordinate) -> List[str]:
+        """Get move options for getting to given coordinate."""
+
+        #option1 = None
+        #option2 = None
+        options = []
+
+        x_diff = self.me.head.x - coord.x
+        y_diff = self.me.head.y - coord.y
+
+        if x_diff > 0:
+            options.append('left')#option1 = 'left'
+        elif x_diff < 0:
+            options.append('right')#option1 = 'right'
+
+        if y_diff > 0:
+            options.append('up')#option2 = 'up'
+        elif y_diff < 0:
+            options.append('down')#option2 = 'down'
 
         return options
