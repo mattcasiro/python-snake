@@ -29,8 +29,6 @@ def start():
 @post('/move')
 def move():
     data = request.json
-
-
     board = Board(data["board"])
     brain = Brain(data["you"]["id"], board)
 

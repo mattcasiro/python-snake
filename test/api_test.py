@@ -23,7 +23,10 @@ class TestApi:
         with open('./test/example_data_filled.json') as f:
             data = json.load(f)
 
-        response = app.post_json('/move', data)
+        try:
+            response = app.post_json('/move', data)
+        except Exception as err:
+            print (err)
         assert response.status == '200 OK'
 
     def test_end(self, app):

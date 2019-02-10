@@ -1,5 +1,6 @@
 """Brain Module"""
 import math # type: ignore
+from operator import itemgetter#attrgetter
 from typing import List, Optional
 from src.snake import Snake
 from src.board import Board
@@ -25,16 +26,12 @@ class Brain:
 
         if self.me.health < self.hunger_threshold:
             if moves_to_food:
-                decision = next((move for move in moves_to_food if move in valid_moves), None)
+                return next((move for move in moves_to_food if move in valid_moves), self.follow_tail()[0])
         else:
-            loop_moves = self.follow_tail()
+            loop_moves = self.follow_tail()#self.circle_perimeter()#self.follow_tail()
             if loop_moves:
-                decision = next((move for move in loop_moves if move in valid_moves), None)
-
-        if not decision:
-            return valid_moves[0]
-
-        return decision
+                return next((move for move in loop_moves if move in valid_moves), self.follow_tail()[0])
+        return valid_moves[0]
 
 
     def get_valid_moves(self) -> List[str]:
@@ -98,24 +95,91 @@ class Brain:
         tail = self.me.coordinates[len(self.me.coordinates) - 1]
         return self.get_moves_to(tail)
 
+    #def circle_perimeter(self) -> List[str]:
+    #    """Do some laps."""
+    #    #change this to an or, and it'll go to nearest corner and loop there
+    #    if (self.me.head.x != 0 and self.me.head.x != self.board.width -1) and \
+    #       (self.me.head.y != 0 and self.me.head.y != self.board.width -1):
+    #        move = self.go_to_nearest_wall()
+    #        print('go_to_wall')
+    #    else:
+    #        move = self.follow_wall()
+    #        print('follow_to_wall')
+
+    #    return [move]
+
+    def go_to_nearest_wall(self) -> str:
+        """Find the nearest wall that you're not already at."""
+        left_dist = ("left", self.me.head.x)
+        right_dist = ("right", (self.board.width - 1) - self.me.head.x)
+        up_dist = ("up", self.me.head.y)
+        down_dist = ("down", (self.board.width -1) - self.me.head.y)
+
+        distances = [left_dist, right_dist, up_dist, down_dist]
+        distances = [distance for distance in distances if distance[1] != 0]
+        least_dist = min(distances, key=itemgetter(1))
+        return least_dist[0]
+
+    #def follow_wall(self) -> str:
+    #    """Follow wall which the snake is currently on."""
+
+    #    second = None
+    #    third = None
+
+    #    print("wall: " + str(self.board.width))
+    #    print("head: (" + str(self.me.head.x) + ", " + str(self.me.head.y) + ")")
+
+    #    if len(self.me.coordinates) > 1:
+    #        second = self.me.coordinates[1]
+    #        print("second: (" + str(second.x) + ", " + str(second.y) + ")")
+    #        if len(self.me.coordinates) > 2:
+    #            third = self.me.coordinates[2]
+    #            print("third: (" + str(third.x) + ", " + str(third.y) + ")")
+
+    #    if self.me.head.x == 0 or self.me.head.x == self.board.width -1:
+    #        if second is not None and second.y > self.me.head.y or second is None:
+    #            return 'up'
+    #        elif second is not None and second.y < self.me.head.y:
+    #            return 'down'
+    #        else:
+    #            if third is not None:
+    #                if third.y > self.me.head.y:
+    #                    return 'up'
+    #                else:
+    #                    return 'down'
+
+    #    if self.me.head.y == 0 or self.me.head.y == self.board.width - 1:
+    #        if second is not None and second.x > self.me.head.x or second is None:
+        #        return 'left'
+        #    elif second is not None and second.x < self.me.head.x:
+        #        return 'right'
+        #    else:
+        #        if third is not None:
+        #            if third.x > self.me.head.x:
+        #                return 'left'
+        #            else:
+        #                return 'right'
+        #print("Reached unexpected condition in follow_wall")
+        #return "left"
+
     def get_moves_to(self, coord: Coordinate) -> List[str]:
         """Get move options for getting to given coordinate."""
-
-        #option1 = None
-        #option2 = None
         options = []
-
         x_diff = self.me.head.x - coord.x
         y_diff = self.me.head.y - coord.y
 
+        print(str(self.me.head.x) + "," + str(self.me.head.y))
+        print(str(y_diff) + "; " + str(x_diff))
         if x_diff > 0:
-            options.append('left')#option1 = 'left'
+            options.append('left')
         elif x_diff < 0:
-            options.append('right')#option1 = 'right'
+            options.append('right')
 
         if y_diff > 0:
-            options.append('up')#option2 = 'up'
+            options.append('up')
         elif y_diff < 0:
-            options.append('down')#option2 = 'down'
+            options.append('down')
 
+        if abs(y_diff) > abs(x_diff):
+            options.reverse()
         return options
