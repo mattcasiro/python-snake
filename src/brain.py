@@ -47,7 +47,7 @@ class Brain:
 
     def get_nearest_food(self) -> Optional[Coordinate]:
         """Get the food item which has coordinates closest to this snake's head."""
-        closest_food = (Coordinate((0,0), None), 9999.0)
+        closest_food = (Coordinate((0,0)), 9999.0)
 
         for food in self.board.foods:
             x_diff = self.me.head.x - food.x

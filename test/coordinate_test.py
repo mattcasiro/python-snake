@@ -8,7 +8,7 @@ class TestCoordinate:
 
     def get_coordinate(self):
         coordinate = (self.DEFAULT_X, self.DEFAULT_Y)
-        return Coordinate(coordinate, None)
+        return Coordinate(coordinate)
 
     def test_create_coordinate(self):
         assert type(Coordinate(5, 5)).__name__ == 'Coordinate'
@@ -21,22 +21,22 @@ class TestCoordinate:
 
     def test_coordinate_can_provide_up_coordinate(self):
         coordinate = (self.DEFAULT_X, self.DEFAULT_Y - 1)
-        up_coordinate = Coordinate(coordinate, None)
+        up_coordinate = Coordinate(coordinate)
         assert self.get_coordinate().get_up() == up_coordinate
 
     def test_coordinate_can_provide_down_coordinate(self):
         coordinate = (self.DEFAULT_X, self.DEFAULT_Y + 1)
-        down_coordinate = Coordinate(coordinate, None)
+        down_coordinate = Coordinate(coordinate)
         assert self.get_coordinate().get_down() == down_coordinate
 
     def test_coordinate_can_provide_right_coordinate(self):
         coordinate = (self.DEFAULT_X + 1, self.DEFAULT_Y)
-        right_coordinate = Coordinate(coordinate, None)
+        right_coordinate = Coordinate(coordinate)
         assert self.get_coordinate().get_right() == right_coordinate
 
     def test_coordinate_can_provide_left_coordinate(self):
         coordinate = (self.DEFAULT_X - 1, self.DEFAULT_Y)
-        left_coordinate = Coordinate(coordinate, None)
+        left_coordinate = Coordinate(coordinate)
         assert self.get_coordinate().get_left() == left_coordinate
 
     def test_immutability_of_coordinates(self):

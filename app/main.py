@@ -23,7 +23,7 @@ def ping():
 def start():
     data: Any = request.json
     print("Starting game %s" % data["game"]["id"])
-    return api.start_response("ffb6c1")
+    return api.start_response("#ffb6c1")
 
 
 @post('/move')
