@@ -6,7 +6,7 @@ from typing import Tuple, Optional, Any
 class Coordinate(object):
     """Abstract each board position."""
 
-    def __init__(self, coordinate: Any, secondCoord: Optional[int]) -> None:
+    def __init__(self, coordinate: Any, secondCoord: Optional[int] = None) -> None:
         """Instantiate Coordinate with x and y values."""
         #self._coordinate: Tuple[int, int] = coordinate
         if isinstance(coordinate, tuple): 
@@ -22,10 +22,7 @@ class Coordinate(object):
 
     def fromDict(self, coordinate: dict) -> None:
         """Instantiate Coordinate from object"""
-        if coordinate["x"] is not None and coordinate["y"] is not None:
-            self._coordinate: Tuple[int, int] = (coordinate["x"], coordinate["y"])
-        else:
-            raise ValueError('Coordinate constructor from object didn\'t have valid properties.')
+        self._coordinate: Tuple[int, int] = (coordinate["x"], coordinate["y"])
 
     def fromInts(self, x: int, y: int)-> None:
         """Instantiate Coordinate from two ints"""
@@ -66,16 +63,16 @@ class Coordinate(object):
 
     def get_up(self) -> Coordinate:
         """Return the Coordinate above this Coordinate."""
-        return Coordinate((self.x, self.y - 1), None)
+        return Coordinate((self.x, self.y - 1))
 
     def get_down(self) -> Coordinate:
         """Return the Coordinate below this Coordinate."""
-        return Coordinate((self.x, self.y + 1), None)
+        return Coordinate((self.x, self.y + 1))
 
     def get_right(self) -> Coordinate:
         """Return the Coordinate to the right of this Coordinate."""
-        return Coordinate((self.x + 1, self.y), None)
+        return Coordinate((self.x + 1, self.y))
 
     def get_left(self) -> Coordinate:
         """Return the Coordinate to the left of this Coordinate."""
-        return Coordinate((self.x - 1, self.y), None)
+        return Coordinate((self.x - 1, self.y))

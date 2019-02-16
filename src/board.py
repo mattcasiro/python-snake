@@ -22,7 +22,7 @@ class Board:
     def foods(self) -> List[Coordinate]:
         """Retreive the list of food from the board data."""
         if self._foods is None:
-            self._foods = [Coordinate(food_data, None) for food_data in self._data['food']]
+            self._foods = [Coordinate(food_data) for food_data in self._data['food']]
         return self._foods
 
     @property
