@@ -71,7 +71,7 @@ class TestBrain:
 
     def test_brain_can_make_decision(self):
         brain = self.get_brain(self.main_snake + self.equal_snake, self.foods, self.width)
-        assert brain.get_decision() == "right"
+        assert brain.get_decision() == "left"
 
         brain = self.get_brain(self.main_snake, self.foods, self.width)
         assert brain.get_decision() == "right"

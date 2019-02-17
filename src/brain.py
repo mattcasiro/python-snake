@@ -101,18 +101,18 @@ class Brain:
         tail = self.me.coordinates[len(self.me.coordinates) - 1]
         return self.get_moves_to(tail)
 
-    #def circle_perimeter(self) -> List[str]:
-    #    """Do some laps."""
-    #    #change this to an or, and it'll go to nearest corner and loop there
-    #    if (self.me.head.x != 0 and self.me.head.x != self.board.width -1) and \
-    #       (self.me.head.y != 0 and self.me.head.y != self.board.width -1):
-    #        move = self.go_to_nearest_wall()
-    #        print('go_to_wall')
-    #    else:
-    #        move = self.follow_wall()
-    #        print('follow_to_wall')
-
-    #    return [move]
+#    def circle_perimeter(self) -> List[str]:
+#        """Do some laps."""
+#        #change this to an or, and it'll go to nearest corner and loop there
+#        if (self.me.head.x != 0 and self.me.head.x != self.board.width -1) and \
+#           (self.me.head.y != 0 and self.me.head.y != self.board.width -1):
+#            move = self.go_to_nearest_wall()
+#            print('go_to_wall')
+#        else:
+#            move = self.follow_wall()
+#            print('follow_to_wall')
+# 
+#        return [move]
 
     def go_to_nearest_wall(self) -> str:
         """Find the nearest wall that you're not already at."""
@@ -126,47 +126,47 @@ class Brain:
         least_dist = min(distances, key=itemgetter(1))
         return least_dist[0]
 
-    #def follow_wall(self) -> str:
-    #    """Follow wall which the snake is currently on."""
-
-    #    second = None
-    #    third = None
-
-    #    print("wall: " + str(self.board.width))
-    #    print("head: (" + str(self.me.head.x) + ", " + str(self.me.head.y) + ")")
-
-    #    if len(self.me.coordinates) > 1:
-    #        second = self.me.coordinates[1]
-    #        print("second: (" + str(second.x) + ", " + str(second.y) + ")")
-    #        if len(self.me.coordinates) > 2:
-    #            third = self.me.coordinates[2]
-    #            print("third: (" + str(third.x) + ", " + str(third.y) + ")")
-
-    #    if self.me.head.x == 0 or self.me.head.x == self.board.width -1:
-    #        if second is not None and second.y > self.me.head.y or second is None:
-    #            return 'up'
-    #        elif second is not None and second.y < self.me.head.y:
-    #            return 'down'
-    #        else:
-    #            if third is not None:
-    #                if third.y > self.me.head.y:
-    #                    return 'up'
-    #                else:
-    #                    return 'down'
-
-    #    if self.me.head.y == 0 or self.me.head.y == self.board.width - 1:
-    #        if second is not None and second.x > self.me.head.x or second is None:
-        #        return 'left'
-        #    elif second is not None and second.x < self.me.head.x:
-        #        return 'right'
-        #    else:
-        #        if third is not None:
-        #            if third.x > self.me.head.x:
-        #                return 'left'
-        #            else:
-        #                return 'right'
-        #print("Reached unexpected condition in follow_wall")
-        #return "left"
+#    def follow_wall(self) -> str:
+#        """Follow wall which the snake is currently on."""
+#
+#        second = None
+#        third = None
+#
+#        print("wall: " + str(self.board.width))
+#        print("head: (" + str(self.me.head.x) + ", " + str(self.me.head.y) + ")")
+#
+#        if len(self.me.coordinates) > 1:
+#            second = self.me.coordinates[1]
+#            print("second: (" + str(second.x) + ", " + str(second.y) + ")")
+#            if len(self.me.coordinates) > 2:
+#                third = self.me.coordinates[2]
+#                print("third: (" + str(third.x) + ", " + str(third.y) + ")")
+#
+#        if self.me.head.x == 0 or self.me.head.x == self.board.width -1:
+#            if second is not None and second.y > self.me.head.y or second is None:
+#                return 'up'
+#            elif second is not None and second.y < self.me.head.y:
+#                return 'down'
+#            else:
+#                if third is not None:
+#                    if third.y > self.me.head.y:
+#                        return 'up'
+#                    else:
+#                        return 'down'
+# 
+#        if self.me.head.y == 0 or self.me.head.y == self.board.width - 1:
+#            if second is not None and second.x > self.me.head.x or second is None:
+#                return 'left'
+#            elif second is not None and second.x < self.me.head.x:
+#                return 'right'
+#            else:
+#                if third is not None:
+#                    if third.x > self.me.head.x:
+#                        return 'left'
+#                    else:
+#                        return 'right'
+#        print("Reached unexpected condition in follow_wall")
+#        return "left"
 
     def get_moves_to(self, coord: Coordinate) -> List[str]:
         """Get move options for getting to given coordinate."""
