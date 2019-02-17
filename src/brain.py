@@ -42,10 +42,27 @@ class Brain:
 
     def get_valid_moves(self) -> List[str]:
         """Return the moves which won't immediately get the snake killed."""
+        moves = self.get_valid_moves_helper(True)
+
+        if not moves or not len(moves):
+            moves = self.get_valid_moves_helper(False)
+            #print("resorted to not avoiding headons")
+
+        return moves
+
+
+    def get_valid_moves_helper(self, avoid_collisions: bool) -> List[str]:
+        """Return moves which are deemed valid, option to not avoid headons"""
         moves = ["left", "right", "up", "down"]
         valid_moves = []
-        collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates]
-        collision_coordinates = collision_coordinates + self.get_threatening_snakes_moves()
+        collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates] #snake.coordinates[:-1]]
+        if avoid_collisions:
+            collision_coordinates = collision_coordinates + self.get_threatening_snakes_moves()
+
+        #remove this snake's tail from array of "invalid moves"
+        tail = self.me.coordinates[-1]
+        if tail in collision_coordinates:
+            collision_coordinates.remove(tail)
 
         for move in moves:
             move_coordinate = getattr(self.me.head, "get_"+move)()
@@ -53,6 +70,7 @@ class Brain:
                 valid_moves.append(move)
 
         return valid_moves
+
 
     def get_nearest_food(self) -> Optional[Coordinate]:
         """Get the food item which has coordinates closest to this snake's head."""
@@ -174,8 +192,8 @@ class Brain:
         x_diff = self.me.head.x - coord.x
         y_diff = self.me.head.y - coord.y
 
-        print(str(self.me.head.x) + "," + str(self.me.head.y))
-        print(str(y_diff) + "; " + str(x_diff))
+        #print(str(self.me.head.x) + "," + str(self.me.head.y))
+        #print(str(y_diff) + "; " + str(x_diff))
         if x_diff > 0:
             options.append('left')
         elif x_diff < 0:
