@@ -20,18 +20,24 @@ class Brain:
         """Get the move which the snake will make this turn."""
         moves_to_food = self.get_moves_for_nearest_food()
         valid_moves = self.get_valid_moves()
+        decision = None
 
+        # in case the head is right next to the tail, if there aren't any valid moves, move towards tail
         if not valid_moves:
             return self.follow_tail()[0]
 
         if self.me.health < self.hunger_threshold:
             if moves_to_food:
-                return next((move for move in moves_to_food if move in valid_moves), self.follow_tail()[0])
+                decision = next((move for move in moves_to_food if move in valid_moves), None)
         else:
             loop_moves = self.follow_tail()#self.circle_perimeter()#self.follow_tail()
             if loop_moves:
-                return next((move for move in loop_moves if move in valid_moves), self.follow_tail()[0])
-        return valid_moves[0]
+                decision = next((move for move in loop_moves if move in valid_moves), None)
+ 
+        if not decision:
+            decision = valid_moves[0]
+ 
+        return decision
 
 
     def get_valid_moves(self) -> List[str]:
