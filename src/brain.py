@@ -116,7 +116,7 @@ class Brain:
 
     def follow_tail(self) -> List[str]:
         """Get moves for getting to tail."""
-        tail = self.me.coordinates[len(self.me.coordinates) - 1]
+        tail = self.me.coordinates[-1]
         return self.get_moves_to(tail)
 
 #    def circle_perimeter(self) -> List[str]:
