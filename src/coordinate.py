@@ -11,12 +11,12 @@ class Coordinate(object):
         #self._coordinate: Tuple[int, int] = coordinate
         if isinstance(coordinate, tuple): 
             self.fromTuple(coordinate)
-        elif isinstance(coordinate, int) and secondCoord is not None:
+        elif isinstance(coordinate, int) and isinstance(secondCoord, int):
             self.fromInts(coordinate, secondCoord)
         elif isinstance(coordinate, dict):
             self.fromDict(coordinate)
         else:
-            raise Exception('cannot initialize coordinate from parameters: ' + coordinate + '; ' + secondCoord)
+            raise Exception('cannot initialize coordinate from parameters: ' + coordinate + '(' + type(coordinate) + '); ' + secondCoord + '(' + type(secondCoord) + ')')
 
 
 
