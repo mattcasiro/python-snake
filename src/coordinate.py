@@ -1,6 +1,6 @@
 """Coordinate module"""
 from __future__ import annotations
-from typing import Tuple, Optional, Any
+from typing import Tuple, Optional, Any, List
 
 
 class Coordinate(object):
@@ -76,3 +76,14 @@ class Coordinate(object):
     def get_left(self) -> Coordinate:
         """Return the Coordinate to the left of this Coordinate."""
         return Coordinate((self.x - 1, self.y))
+
+    def get_neighbours(self) -> List[Coordinate]:
+        """Return the Coordinates surrounding this Coordinate."""
+        moves = ['left', 'right', 'up', 'down']
+        neighbours = []
+
+        for move in moves:
+            move_coordinate = getattr(self, "get_"+move)()
+            neighbours.append(move_coordinate)
+
+        return neighbours 
