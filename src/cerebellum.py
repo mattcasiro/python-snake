@@ -1,0 +1,114 @@
+"""Pathfinding Module"""
+import pdb
+from queue import Queue
+from typing import List, Optional
+from src.snake import Snake
+from src.board import Board
+from src.coordinate import Coordinate
+
+
+class Cerebellum:
+    """Find paths to given coordinates."""
+    def __init__(self, brain, selected_algorithm: Optional[str]) -> None:
+        self.selected_algorithm: str = selected_algorithm if selected_algorithm is not None else 'breadth_first'
+        self.brain = brain
+        self.me = self.brain.me
+        self.board: Board = self.brain.board
+
+    def get_path(self, coordinate: Optional[Coordinate] = None, coordinates: Optional[List[Coordinate]] = None) -> List[Coordinate]:
+        """Find path to given coordinate/coordinates based on pathfinder's selected algorithm."""
+
+        if coordinates is None:
+            if coordinate is None:
+                return []
+            coordinates = [coordinate]
+
+        path: List[Coordinate] = []
+
+        if self.selected_algorithm == 'breadth_first':
+            path = self.__get_breadth_first_path(coordinates)
+
+#        elif self.selected_algorithm == 'djikstra\'s':
+#            path = self.__get_djikstras_path(coordinates)
+
+#        elif self.selected_algorithm == 'a*':
+#            path = self.__get_a_star_path(coordinates)
+
+        return path
+
+    def __get_breadth_first_path(self, coordinates: List[Coordinate]) -> List[Coordinate]:
+        """Find path using breadth-first algorithm."""
+
+        #pick location from grid (self.me.head)
+        #expand that location by looking at neighbours
+        #any unvisited neighbours are added to "unexplored" and "visited" set
+
+        for coord in coordinates:
+            print(coord)
+
+        start = self.me.head
+
+        unexplored: Queue = Queue()
+        unexplored.put(start)
+        came_from: dict = {}
+        came_from[str(start)] = None
+
+        collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates]
+
+        #remove this snake's tail from array of "invalid moves"
+        tail = self.brain.me.coordinates[-1]
+        if tail in collision_coordinates:
+            collision_coordinates.remove(tail)
+
+
+        matched = False
+        while not unexplored.empty():
+            current = unexplored.get()
+
+            if any(coord.x == current.x and coord.y == current.y for coord in coordinates):
+                matched = True
+                break
+
+            valid_move_coordinatees = [coord for coord in current.get_neighbours() if self.board.is_coordinate_in_bounds(coord) and coord not in collision_coordinates]
+            #also need to account for snakebodies
+
+            for neighbour in valid_move_coordinatees:
+                if not str(neighbour) in came_from:
+                    unexplored.put(neighbour)
+                    came_from[str(neighbour)] = current
+
+        if not matched:
+            print("no match?!")
+
+        print("start", start)
+        print("current", current)
+
+        if current is not None:
+            path = self.__get_path_from_current(current, start, came_from)
+            for i in path:
+                print(i, end = '  ')
+            return path
+        else:
+            return []
+
+#    def __get_djikstras_path(self, coordinates: List[Coordinate]) -> List[Coordinate]:
+#        """Find path using djikstra's algorithm."""
+#
+#        raise NotImplementedError("Gotta write the code first!")
+#        return []
+#
+#    def __get_a_star_path(self, coordinates: List[Coordinate]) -> List[Coordinate]:
+#        """Find path using A* algorithm."""
+#
+#        raise NotImplementedError("Gotta write the code first!")
+#        return []
+
+    def __get_path_from_current(self, current: Coordinate, start: Coordinate, came_from: dict) -> List[Coordinate]:
+        """Given end coord and "came-from" list, return the list of coordinates leading back to start."""
+        path = []
+        while current != start: 
+            path.append(current)
+            current = came_from[str(current)]
+        path.reverse() # optional
+
+        return path

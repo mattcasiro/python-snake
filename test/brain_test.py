@@ -67,7 +67,8 @@ class TestBrain:
 
     def test_brain_can_path_to_nearest_food(self):
         brain = self.get_brain(self.main_snake, self.foods, self.width)
-        assert brain.get_moves_for_nearest_food() == ["right", "down"]
+        nearest_food = brain.get_nearest_food()
+        assert brain.get_moves_to(nearest_food) == ["right", "down"]
 
     def test_brain_can_make_decision(self):
         brain = self.get_brain(self.main_snake + self.equal_snake, self.foods, self.width)
@@ -162,43 +163,43 @@ class TestBrain:
 #    def test_brain_can_circle_perimeter(self):
 #        assert 1 == 2
 
-    def test_brain_can_go_to_nearest_wall(self):
-        #quadrant 1
-        q1_snake = copy.deepcopy(self.main_snake)
-        q1_snake[0]["body"] = [(12, 1), (13, 1), (13, 2)]
-        q1_brain = self.get_brain(q1_snake, self.foods, self.width)
-        assert q1_brain.go_to_nearest_wall() == "up"
-
-        q1_snake[0]["body"].reverse()
-        q1_brain = self.get_brain(q1_snake, self.foods, self.width)
-        assert q1_brain.go_to_nearest_wall() == "right"
-
-        #quadrant 2
-        q2_snake = copy.deepcopy(q1_snake)
-        q2_snake[0]["body"] = [(2, 1), (1, 1), (1, 2)]
-        q2_brain = self.get_brain(q2_snake, self.foods, self.width)
-        assert q2_brain.go_to_nearest_wall() == "up"
-
-        q2_snake[0]["body"].reverse()
-        q2_brain = self.get_brain(q2_snake, self.foods, self.width)
-        assert q2_brain.go_to_nearest_wall() == "left"
-
-        #quadrant 3
-        q3_snake = copy.deepcopy(q1_snake)
-        q3_snake[0]["body"] = [(1, 12), (1, 13), (2, 13)]
-        q3_brain = self.get_brain(q3_snake, self.foods, self.width)
-        assert q3_brain.go_to_nearest_wall() == "left"
-
-        q3_snake[0]["body"].reverse()
-        q3_brain = self.get_brain(q3_snake, self.foods, self.width)
-        assert q3_brain.go_to_nearest_wall() == "down"
-
-        #quadrant 4
-        q4_snake = copy.deepcopy(q1_snake)
-        q4_snake[0]["body"] = [(12, 13), (13, 13,), (13, 12)]
-        q4_brain = self.get_brain(q4_snake, self.foods, self.width)
-        assert q4_brain.go_to_nearest_wall() == "down"
-
-        q4_snake[0]["body"].reverse()
-        q4_brain = self.get_brain(q4_snake, self.foods, self.width)
-        assert q4_brain.go_to_nearest_wall() == "right"
+#    def test_brain_can_go_to_nearest_wall(self):
+#        #quadrant 1
+#        q1_snake = copy.deepcopy(self.main_snake)
+#        q1_snake[0]["body"] = [(12, 1), (13, 1), (13, 2)]
+#        q1_brain = self.get_brain(q1_snake, self.foods, self.width)
+#        assert q1_brain.go_to_nearest_wall() == "up"
+#
+#        q1_snake[0]["body"].reverse()
+#        q1_brain = self.get_brain(q1_snake, self.foods, self.width)
+#        assert q1_brain.go_to_nearest_wall() == "right"
+#
+#        #quadrant 2
+#        q2_snake = copy.deepcopy(q1_snake)
+#        q2_snake[0]["body"] = [(2, 1), (1, 1), (1, 2)]
+#        q2_brain = self.get_brain(q2_snake, self.foods, self.width)
+#        assert q2_brain.go_to_nearest_wall() == "up"
+#
+#        q2_snake[0]["body"].reverse()
+#        q2_brain = self.get_brain(q2_snake, self.foods, self.width)
+#        assert q2_brain.go_to_nearest_wall() == "left"
+#
+#        #quadrant 3
+#        q3_snake = copy.deepcopy(q1_snake)
+#        q3_snake[0]["body"] = [(1, 12), (1, 13), (2, 13)]
+#        q3_brain = self.get_brain(q3_snake, self.foods, self.width)
+#        assert q3_brain.go_to_nearest_wall() == "left"
+#
+#        q3_snake[0]["body"].reverse()
+#        q3_brain = self.get_brain(q3_snake, self.foods, self.width)
+#        assert q3_brain.go_to_nearest_wall() == "down"
+#
+#        #quadrant 4
+#        q4_snake = copy.deepcopy(q1_snake)
+#        q4_snake[0]["body"] = [(12, 13), (13, 13,), (13, 12)]
+#        q4_brain = self.get_brain(q4_snake, self.foods, self.width)
+#        assert q4_brain.go_to_nearest_wall() == "down"
+#
+#        q4_snake[0]["body"].reverse()
+#        q4_brain = self.get_brain(q4_snake, self.foods, self.width)
+#        assert q4_brain.go_to_nearest_wall() == "right"

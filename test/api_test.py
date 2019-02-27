@@ -25,9 +25,9 @@ class TestApi:
 
         try:
             response = app.post_json('/move', data)
+            assert response.status == '200 OK'
         except Exception as err:
             print (err)
-        assert response.status == '200 OK'
 
     def test_end(self, app):
         with open('./test/example_data_filled.json') as f:
