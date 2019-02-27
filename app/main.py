@@ -33,7 +33,7 @@ def move():
     brain = Brain(data["you"]["id"], board)
 
     decision = brain.get_decision()
-    print(decision)
+    print("Turn: ", data["turn"], "; snake_id: ", data["you"]["id"], "; made the decision to go ", decision)
     return api.move_response(decision)
 
 @post('/end')
