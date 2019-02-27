@@ -50,5 +50,4 @@ class Snake:
 
     def get_all_moves(self) -> List[Coordinate]:
         """Get list of coordinates for left, right, up, down, of the snake's head - regardless of whether or not it kills the snake."""
-        all_moves = ["left", "right", "up", "down"]
-        return [getattr(self.head, "get_"+move)() for move in all_moves]
+        return self.head.get_neighbours()
