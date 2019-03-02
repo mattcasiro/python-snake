@@ -9,11 +9,10 @@ from src.coordinate import Coordinate
 
 class Cerebellum:
     """Find paths to given coordinates."""
-    def __init__(self, brain, selected_algorithm: Optional[str]) -> None:
-        self.selected_algorithm: str = selected_algorithm if selected_algorithm is not None else 'breadth_first'
-        self.brain = brain
-        self.me = self.brain.me
-        self.board: Board = self.brain.board
+    def __init__(self, me: Snake, board: Board, selected_algorithm: Optional[str] = None) -> None:
+        self.selected_algorithm: str = selected_algorithm if selected_algorithm is not None else "breadth_first"
+        self.me = me
+        self.board: Board = board
 
     def get_path(self, coordinate: Optional[Coordinate] = None, coordinates: Optional[List[Coordinate]] = None) -> List[Coordinate]:
         """Find path to given coordinate/coordinates based on pathfinder's selected algorithm."""
@@ -56,7 +55,7 @@ class Cerebellum:
         collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates]
 
         #remove this snake's tail from array of "invalid moves"
-        tail = self.brain.me.coordinates[-1]
+        tail = self.me.coordinates[-1]
         if tail in collision_coordinates:
             collision_coordinates.remove(tail)
 
