@@ -6,6 +6,7 @@ from src.snake import Snake
 class TestBoard:
     def get_board(self):
         width = 15
+        height = 16
         snakes = [{
             "body": [(2, 2), (2,3), (3,3)],
             "health": 10,
@@ -18,7 +19,8 @@ class TestBoard:
         return Board({
             "snakes": snakes,
             "food": foods,
-            "width": width
+            "width": width,
+            "height": height
         })
 
     def test_create_board(self):
@@ -53,10 +55,10 @@ class TestBoard:
         coordinate = Coordinate(15, 0)
         assert board.is_coordinate_in_bounds(coordinate) == False
 
-        coordinate = Coordinate(0, 15)
+        coordinate = Coordinate(0, 16)
         assert board.is_coordinate_in_bounds(coordinate) == False
 
-        coordinate = Coordinate(0, 14)
+        coordinate = Coordinate(0, 15)
         assert board.is_coordinate_in_bounds(coordinate) == True
 
         coordinate = Coordinate(14, 0)

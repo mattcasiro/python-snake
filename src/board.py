@@ -31,10 +31,15 @@ class Board:
         """Get width of the board -- note: it's a square."""
         return self._data['width']
 
+    @property
+    def height(self) -> int:
+        """Get height of the board -- note: it's not a square, we lied earlier."""
+        return self._data['height']
+
     def is_coordinate_in_bounds(self, coordinate) -> bool:
         """Check whether or not the Coordinate is within the bounds of the Board."""
         is_wall = (coordinate.x == -1 or coordinate.x == self.width
-                   or coordinate.y == -1 or coordinate.y == self.width)
+                   or coordinate.y == -1 or coordinate.y == self.height)
         return not is_wall
 
     def get_other_snakes(self, exclude_id) -> List[Snake]:
