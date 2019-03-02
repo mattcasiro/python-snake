@@ -39,7 +39,7 @@ class TestCerebellum:
 
     def test_cerebellum_get_path(self):
         brain = self.get_brain(self.main_snake, self.foods, self.width)
-        cereb = Cerebellum(brain, "breadth_first")
+        cereb = Cerebellum(brain.me, brain.board, "breadth_first")
         path = cereb.get_path(Coordinate(10,6))
         assert path == [
             Coordinate(3,2),
@@ -58,7 +58,7 @@ class TestCerebellum:
 
     def test_cerebellum_breadth_first_path(self):
         brain = self.get_brain(self.main_snake, self.foods, self.width)
-        cereb = Cerebellum(brain, "breadth_first")
+        cereb = Cerebellum(brain.me, brain.board, "breadth_first")
         path = cereb.get_path(Coordinate(10,5))
 
         assert path == [

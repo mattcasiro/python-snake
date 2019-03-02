@@ -16,16 +16,17 @@ class Brain:
         self.my_id: str = my_id
         self.other_snakes: List[Snake] = self.board.get_other_snakes(my_id)
         self.me: Snake = next((snake for snake in self.board.snakes if snake.id == my_id))
-        self.cerebellum = Cerebellum(self, None)
+        self.cerebellum = Cerebellum(self.me, self.board)
 
     def get_decision(self) -> str:
         """Get the move which the snake will make this turn."""
         valid_moves = self.get_valid_moves()
         decision = None
+        tail = self.me.coordinates[-1]
 
         # in case the head is right next to the tail, if there aren't any valid moves, move towards tail
         if not valid_moves:
-            path = self.cerebellum.get_path(self.me.coordinates[-1])
+            path = self.cerebellum.get_path(tail)
             if not path:
                 return self.follow_tail()[0]
             return self.get_moves_to(path[0])[0]
@@ -37,7 +38,6 @@ class Brain:
                 moves_for_first_path_step = self.get_moves_to(path_to_nearest_food[0])
                 decision = next((move for move in moves_for_first_path_step if move in valid_moves), None)
         else:
-            tail = self.me.coordinates[-1]
             tail_path = self.cerebellum.get_path(tail)
             if tail_path is None or len(tail_path) == 0:
                 return self.follow_tail()[0]
