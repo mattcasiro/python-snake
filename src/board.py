@@ -57,7 +57,4 @@ class Board:
         me.coordinates.reverse()
         me.coordinates.append(me.coordinates[-1])
 
-        print("new coords:")
-        for coord in me.coordinates:
-            print(coord)
         return self

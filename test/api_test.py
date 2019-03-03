@@ -27,7 +27,32 @@ class TestApi:
             response = app.post_json('/move', data)
             assert response.status == '200 OK'
         except Exception as err:
+            assert 0, err
             print (err)
+
+    def test_move_validates(self, app):
+        data = {
+            'board': {
+                'food': [{'x': 1, 'y': 1}],
+                'height': 10,
+                'snakes': [{
+                    'body': [{'x': 2, 'y': 2}],
+                    'health': 0,
+                    'id': 'you',
+                    'name': 'you'
+                }],
+                'width': 10
+            },
+            'game': {'id': '1551571647904662475'},
+            'turn': 1,
+            'you': {
+                'body': [{'x': 2, 'y': 2}],
+                'health': 0,
+                'id': 'you',
+                'name': 'you'
+            }
+        }
+        assert 1
 
     def test_end(self, app):
         with open('./test/example_data_filled.json') as f:
