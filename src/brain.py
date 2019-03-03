@@ -29,7 +29,8 @@ class Brain:
         if not valid_moves:
             path = self.cerebellum.get_path(tail)
             if not path:
-                return self.follow_tail()[0]
+                tail_direction = self.follow_tail()
+                return tail_direction[0] if len(tail_direction) > 0 else 'left'
             return self.get_moves_to(path[0])[0]
 
         # find food if snake isn't longest / is hungry
@@ -72,7 +73,8 @@ class Brain:
 
         tail_path = self.cerebellum.get_path(tail)
         if tail_path is None or len(tail_path) == 0:
-            return self.follow_tail()[0]
+            tail_direction = self.follow_tail()
+            return tail_direction[0] if len(tail_direction) > 0 else None
 
         first_in_tail_path = tail_path[0]
         loop_moves = self.get_moves_to(first_in_tail_path)
