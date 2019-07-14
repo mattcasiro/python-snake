@@ -27,38 +27,32 @@ class Brain:
 
         # in case the head is right next to the tail, if there aren't any valid moves, move towards tail
         if not valid_moves:
-            path = self.cerebellum.get_path(tail)
-            if not path:
-                tail_direction = self.follow_tail()
-                return tail_direction[0] if len(tail_direction) > 0 else 'left'
-            return self.get_moves_to(path[0])[0]
+            tail_direction = self.follow_tail()
+            return tail_direction[0] if len(tail_direction) > 0 else 'left'
 
         # find food if snake isn't longest / is hungry
         if not self.get_snake_is_safe_length() or self.me.health < self.hunger_threshold:
-            #get path to food
-            path_to_nearest_food = self.cerebellum.get_path(None, self.board.foods)#nearest_food)
+            # get path to food
+            path_to_nearest_food = self.cerebellum.get_path(None, self.board.foods)
 
             if len(path_to_nearest_food):
-                #get string direction move for first coord in path
+                # get string direction move for first coord in path
                 moves_for_first_path_step = self.get_moves_to(path_to_nearest_food[0])
 
-                #pick a move out of ^ based on what's "valid"
+                # pick a move out of ^ based on what's "valid"
                 decision = next((move for move in moves_for_first_path_step if move in valid_moves), None)
 
-            if not decision:
-                #go to tail if there weren't any valid food paths
-                decision = self.get_tail_path_decision(tail, valid_moves)
-
-        else:
-            #if snake is biggest and not hungry, loop
-            decision = self.get_tail_path_decision(tail, valid_moves)
- 
         if not decision:
-            #if there's STILL no decision made, go to the first 'valid' move (doesn't really ever hit this)
+            # if snake is biggest and not hungry, or if there weren't any valid
+            # food paths, move towards tail
+            decision = self.get_tail_path_decision(tail, valid_moves)
+
+        if not decision:
+            # if there's STILL no decision made, go to the first 'valid' move (doesn't really ever hit this)
             decision = valid_moves[0]
 
         return decision
- 
+
     def get_valid_moves(self) -> List[str]:
         """Return the moves which won't immediately get the snake killed."""
         moves = self.get_valid_moves_helper(True)
@@ -73,8 +67,7 @@ class Brain:
 
         tail_path = self.cerebellum.get_path(tail)
         if tail_path is None or len(tail_path) == 0:
-            tail_direction = self.follow_tail()
-            return tail_direction[0] if len(tail_direction) > 0 else None
+            return None
 
         first_in_tail_path = tail_path[0]
         loop_moves = self.get_moves_to(first_in_tail_path)
@@ -88,7 +81,7 @@ class Brain:
         """Return moves which are deemed valid, option to not avoid headons"""
         moves = ["left", "right", "up", "down"]
         valid_moves = []
-        collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates] #snake.coordinates[:-1]]
+        collision_coordinates = [coordinate for snake in self.board.snakes for coordinate in snake.coordinates]
         if avoid_collisions:
             collision_coordinates = collision_coordinates + self.get_threatening_snakes_moves()
 

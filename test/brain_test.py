@@ -204,12 +204,15 @@ class TestBrain:
         ]
 
         brain = self.get_brain(a+b+c, foods, 11)
-        #print(brain.board.snakes)
-        #for coord in brain.board.snakes[0].coordinates:
-        #    print(coord)
-
         assert brain.get_decision() == "left"
 
-
-
+    def test_snake_avoids_self(self):
+        a = copy.deepcopy(self.main_snake)
+        a[0]["body"] = [
+            (5,5),
+            (6,5),
+            (6,5)
+        ]
+        brain = self.get_brain(a, [], 11)
+        assert brain.get_decision() != "right"
 

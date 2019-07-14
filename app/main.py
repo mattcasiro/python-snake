@@ -30,8 +30,6 @@ def start():
 @post('/move')
 def move():
     data = request.json
-    print('Move data:')
-    pprint(data)
     board = Board(data["board"])
     brain = Brain(data["you"]["id"], board)
 
