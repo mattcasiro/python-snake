@@ -33,7 +33,7 @@ class Brain:
         # find food if snake isn't longest / is hungry
         if not self.get_snake_is_safe_length() or self.me.health < self.hunger_threshold:
             # get path to food
-            path_to_nearest_food = self.cerebellum.get_path(None, self.board.foods)
+            path_to_nearest_food = self.cerebellum.get_path(self.board.foods)
 
             if len(path_to_nearest_food):
                 # get string direction move for first coord in path
