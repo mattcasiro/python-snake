@@ -2,7 +2,8 @@
 import pdb
 import copy
 from queue import Queue
-from typing import List, Optional
+from typing import List, Optional, Union
+from collections.abc import Iterable
 from src.snake import Snake
 from src.board import Board
 from src.coordinate import Coordinate
@@ -15,13 +16,13 @@ class Cerebellum:
         self.me = me
         self.board: Board = copy.deepcopy(board)
 
-    def get_path(self, coordinate: Optional[Coordinate] = None, coordinates: Optional[List[Coordinate]] = None) -> List[Coordinate]:
+    def get_path(self, coordinates: Union[Coordinate, List[Coordinate]]) -> List[Coordinate]:
         """Find path to given coordinate/coordinates based on pathfinder's selected algorithm."""
 
         if coordinates is None:
-            if coordinate is None:
-                return []
-            coordinates = [coordinate]
+            return []
+        elif not isinstance(coordinates, Iterable):
+            coordinates = [coordinates]
 
         path: List[Coordinate] = []
 
