@@ -62,6 +62,22 @@ class TestBoard:
         coordinate = Coordinate(14, 0)
         assert board.is_coordinate_in_bounds(coordinate) == True
 
+    def test_board_can_advance_snake_along_simple_path(self):
+        board = self.get_board()
+
+        path = [
+            Coordinate(3,2),
+            Coordinate(4,2),
+            Coordinate(5,2)
+        ]
+        new_board = board.advance_snake_along_path(board.snakes[0].id, path)
+        new_snake_coords = new_board.snakes[0].coordinates
+        assert new_snake_coords[0] == Coordinate(5,2)
+        assert new_snake_coords[1] == Coordinate(4,2)
+        assert new_snake_coords[2] == Coordinate(3,2)
+        assert new_snake_coords[3] == Coordinate(3,2)
+        assert len(new_snake_coords) == 4
+
     def test_board_can_advance_snake(self):
         board = self.get_board()
 
