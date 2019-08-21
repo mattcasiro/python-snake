@@ -51,6 +51,10 @@ class Coordinate(object):
 
     def __str__(self) -> str:
         return "(" + str(self.x) +","+ str(self.y) + ")"
+    def __repr__(self) -> str:
+        return "(" + str(self.x) +","+ str(self.y) + ")"
+    def __unicode__(self) -> str:
+        return "(" + str(self.x) +","+ str(self.y) + ")"
 
     @property
     def x(self) -> int:
