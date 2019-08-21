@@ -52,9 +52,9 @@ class Board:
         if not me:
             raise ValueError("No snake for given id!")
 
-        me.coordinates += path
-        me.coordinates = me.coordinates[len(path):]
-        me.coordinates.reverse()
-        me.coordinates.append(me.coordinates[-1])
+        path.reverse() #path is leading away from head, whereas it needs to be leading towards head to append at beginning of body
+        me.coordinates = path + me.coordinates
+        me.coordinates = me.coordinates[:len(me.coordinates)-len(path)] #advance the snake
+        me.coordinates.append(me.coordinates[-1]) #food was eaten -- so nned to append a coord at tail
 
         return self
