@@ -45,7 +45,8 @@ class Cerebellum:
         #any unvisited neighbours are added to "unexplored" and "visited" set
 
         board = self.board if not board else board
-        start = self.me.head
+        me_snake = next((snake for snake in board.snakes if snake.id == self.me.id), self.me)
+        start = me_snake.head
 
         unexplored: Queue = Queue()
         unexplored.put(start)
@@ -67,7 +68,8 @@ class Cerebellum:
             if any(coord == current for coord in coordinates):
                 if current != tail:
                     from_path = self.__get_path_from_current(current, start, came_from)
-                    tail_path = self.__get_breadth_first_path([tail], board.advance_snake_along_path(self.me.id, from_path))
+                    updated_state_board = board.advance_snake_along_path(self.me.id, from_path)
+                    tail_path = self.__get_breadth_first_path([tail], updated_state_board)
                     if tail_path:
                         matched = True
                         break
