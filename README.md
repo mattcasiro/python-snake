@@ -62,6 +62,40 @@ or visit [http://APP_NAME.herokuapp.com](http://APP_NAME.herokuapp.com).
 heroku logs --tail
 ```
 
+_______
+
+Other notes:
+
+* To get a local environment going, ensure you've got both the snake AND the engine going.
+## from docs:
+## http://docs.battlesnake.io/zero-to-snake-linux.html
+
+
+#start engine
+cd ~/dev/battlesnake-2019/battlesnake-engine/
+./engine dev
+
+#start snake
+cd ~/dev/battlesnake-2019/python-snake
+#python3 app/main.py
+gunicorn app.main:app
+#or for with console output
+PYTHONPATH=./ python app/main.py
+
+
+
+* If the pytests are breaking and complaining about not being able to find the conftest.py file, 
+delete the compiled python files in the projectsfind 
+'''
+. -name \*.pyc -delete
+'''
+
+
+
+
+
+
+
 ## Contributors
 
 * Jared Middleton (<jaredmiddleton3.14@gmail.com>)
